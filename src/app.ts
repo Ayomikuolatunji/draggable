@@ -69,28 +69,33 @@
 //     }
 // }
 // checkGuard(el1)
-interface Bird {
-  type:'bird',
-  flying:string
-}
-interface Dog {
-  type:"dog"
-  running:string
-}
-type combine=Bird | Dog
+// interface Bird {
+//   type:'bird',
+//   flying:string
+// }
+// interface Dog {
+//   type:"dog"
+//   running:string
+// }
+// type combine=Bird | Dog
+// const check:(animal:combine)=>void=(animal)=>{
+//      let ani;
+//      switch(animal.type){
+//         case 'bird' :
+//            ani=animal.flying
+//            break
+//         case 'dog':
+//           ani=animal.running
+//           break
+//      }
+//      return console.log(ani)
+// }
 
+// check({type:"bird", flying:"yes it is"})
+// const hey=<HTMLInputElement>document.getElementById("id")!;
 
-const check:(animal:combine)=>void=(animal)=>{
-     let ani;
-     switch(animal.type){
-        case 'bird' :
-           ani=animal.flying
-           break
-        case 'dog':
-          ani=animal.running
-          break
-     }
-     return console.log(ani)
+// hey.value="ayomiku"
+
+ interface errorMsg {//email and password
+  [prop:string]:string
 }
-
-check({type:"bird", flying:"yes it is"})
