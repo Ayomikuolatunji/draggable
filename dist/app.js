@@ -33,6 +33,8 @@ class ProjectInput {
         event.preventDefault();
         console.log(this.titleInputElement.value);
     }
+    gatherUserInput() {
+    }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
     }
