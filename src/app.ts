@@ -18,6 +18,9 @@ function autobind(
       require:boolean
       maxLength:number
   }
+  function validite(validateInput:validitable){
+
+  }
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;

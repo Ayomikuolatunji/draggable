@@ -16,6 +16,8 @@ function autobind(_, _2, descriptor) {
     };
     return adjDescriptor;
 }
+function validite(validateInput) {
+}
 class ProjectInput {
     constructor() {
         this.templateElement = document.getElementById('project-input');
