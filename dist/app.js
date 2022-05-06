@@ -31,7 +31,6 @@ class ProjectInput {
     }
     submitHandler(event) {
         event.preventDefault();
-        console.log(this.titleInputElement.value);
     }
     gatherUserInput() {
         const title = this.titleInputElement.value;
@@ -51,7 +50,8 @@ class ProjectInput {
         this.element.addEventListener('submit', this.submitHandler);
         const userInput = this.gatherUserInput();
         if (Array.isArray(userInput)) {
-            [title, description, people] = userInput;
+            const [title, description, people] = userInput;
+            console.log(title);
         }
     }
     attach() {
