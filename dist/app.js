@@ -29,30 +29,30 @@ class ProjectInput {
         this.configure();
         this.attach();
     }
-    submitHandler(event) {
-        event.preventDefault();
-    }
     gatherUserInput() {
-        const title = this.titleInputElement.value;
-        const description = this.descriptionInputElement.value;
-        const people = this.peopleInputElement.value;
-        if (title.trim().length === 0
-            || description.trim.length === 0
-            || people.trim().length === 0) {
-            console.log("no input");
+        const enteredTitle = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = this.peopleInputElement.value;
+        if (enteredTitle.trim().length === 0 ||
+            enteredDescription.trim().length === 0 ||
+            enteredPeople.trim().length === 0) {
+            alert('Invalid input, please try again!');
             return;
         }
         else {
-            return [title, description, +people];
+            return [enteredTitle, enteredDescription, +enteredPeople];
+        }
+    }
+    submitHandler(event) {
+        event.preventDefault();
+        const userInput = this.gatherUserInput();
+        if (Array.isArray(userInput)) {
+            const [title, description, people] = userInput;
+            console.log(title, description, people);
         }
     }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
-        const userInput = this.gatherUserInput();
-        if (Array.isArray(userInput)) {
-            const [title, description, people] = userInput;
-            console.log(title);
-        }
     }
     attach() {
         this.hostElement.insertAdjacentElement('afterbegin', this.element);
