@@ -14,6 +14,8 @@ class projectInput {
         this.attach();
     }
     submitHandler(event) {
+        event.preventDefault();
+        console.log("first");
     }
     configure() {
         this.element.addEventListener("submit", this.submitHandler);

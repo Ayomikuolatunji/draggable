@@ -19,15 +19,13 @@ class projectInput {
         this.titleInputElement=document.querySelector("#title")! 
         this.descInputElement=document.querySelector("#description")!
         this.poepleInputElement=document.querySelector("people")!
-
-
+ 
         this.configure()
-
-
         this.attach()
     }
     private submitHandler(event:Event){
-
+          event.preventDefault()
+          console.log("first")
     }
     private configure(){
         this.element.addEventListener("submit", this.submitHandler)
