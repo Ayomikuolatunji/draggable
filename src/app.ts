@@ -47,19 +47,25 @@ class ProjectInput {
       event.preventDefault();
       console.log(this.titleInputElement.value);
     }
-    private gatherUserInput():[string,string,number]{
+    private gatherUserInput():[string,string,number] | undefined{
         const title=this.titleInputElement.value
         const description=this.descriptionInputElement.value
         const people=this.peopleInputElement.value
         if(title.trim().length===0 
         || description.trim.length===0 
         || people.trim().length===0){
-               
+          console.log("no input")
+          return
+        }else{
+            return [title,description,+people]
         }
     }
     private configure() {
       this.element.addEventListener('submit', this.submitHandler);
       const userInput=this.gatherUserInput()
+      if(Array.isArray(userInput)){
+        [title,description,people]=userInput
+      }
     }
   
     private attach() {

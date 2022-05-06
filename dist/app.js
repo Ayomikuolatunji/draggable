@@ -40,11 +40,19 @@ class ProjectInput {
         if (title.trim().length === 0
             || description.trim.length === 0
             || people.trim().length === 0) {
+            console.log("no input");
+            return;
+        }
+        else {
+            return [title, description, +people];
         }
     }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
         const userInput = this.gatherUserInput();
+        if (Array.isArray(userInput)) {
+            [title, description, people] = userInput;
+        }
     }
     attach() {
         this.hostElement.insertAdjacentElement('afterbegin', this.element);
