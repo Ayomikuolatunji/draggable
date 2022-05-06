@@ -48,7 +48,9 @@ class ProjectInput {
       console.log(this.titleInputElement.value);
     }
     private gatherUserInput():[string,string,number]{
-
+        const title=this.titleInputElement.value
+        const description=this.descriptionInputElement.value
+        const people=this.peopleInputElement.value
     }
     private configure() {
       this.element.addEventListener('submit', this.submitHandler);
