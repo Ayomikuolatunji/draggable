@@ -13,6 +13,11 @@ function autobind(
     };
     return adjDescriptor;
   }
+  interface validitable {
+      value:string | number
+      require:boolean
+      maxLength:number
+  }
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
@@ -48,9 +53,9 @@ class ProjectInput {
         const enteredPeople = this.peopleInputElement.value;
     
         if (
-           validite({value:enteredTitle, maxLength:5, require:true})
-        || validite({value:enteredDescription, maxLength:5, require:true})
-        || validite({value:enteredPeople, maxLength:5, require:true})
+           validite({value:enteredTitle, maxLength:25, require:true})
+        || validite({value:enteredDescription, maxLength:505, require:true})
+        || validite({value:enteredPeople, maxLength:Number.isFinite, require:true})
         ) {
           alert('Invalid input, please try again!');
           return;
