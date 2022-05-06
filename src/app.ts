@@ -13,19 +13,49 @@ function autobind(
     };
     return adjDescriptor;
   }
-  interface validitable {
-      value:string | number
-      require:boolean
-      maxLength:number
+  interface Validatable {
+    value: string | number;
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
   }
-  function validite(validateInput:validitable){
-     let  isValid=true
-     if(validateInput.require){
-         isValid=isValid && validateInput.value.toString().trim().length !==0
-     }
-
-     return isValid
+  
+  function validate(validatableInput: Validatable) {
+    let isValid = true;
+    if (validatableInput.required) {
+      isValid = isValid && validatableInput.value.toString().trim().length !== 0;
+    }
+    if (
+      validatableInput.minLength != null &&
+      typeof validatableInput.value === 'string'
+    ) {
+      isValid =
+        isValid && validatableInput.value.length >= validatableInput.minLength;
+    }
+    if (
+      validatableInput.maxLength != null &&
+      typeof validatableInput.value === 'string'
+    ) {
+      isValid =
+        isValid && validatableInput.value.length <= validatableInput.maxLength;
+    }
+    if (
+      validatableInput.min != null &&
+      typeof validatableInput.value === 'number'
+    ) {
+      isValid = isValid && validatableInput.value >= validatableInput.min;
+    }
+    if (
+      validatableInput.max != null &&
+      typeof validatableInput.value === 'number'
+    ) {
+      isValid = isValid && validatableInput.value <= validatableInput.max;
+    }
+    return isValid;
   }
+  
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
@@ -60,10 +90,26 @@ class ProjectInput {
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
     
+        const titleValidatable: Validatable = {
+          value: enteredTitle,
+          required: true
+        };
+        const descriptionValidatable: Validatable = {
+          value: enteredDescription,
+          required: true,
+          minLength: 5
+        };
+        const peopleValidatable: Validatable = {
+          value: +enteredPeople,
+          required: true,
+          min: 1,
+          max: 5
+        };
+    
         if (
-           validite({value:enteredTitle, maxLength:25, require:true})
-        || validite({value:enteredDescription, maxLength:505, require:true})
-        || validite({value:enteredPeople, maxLength:Number.isFinite, require:true})
+          !validate(titleValidatable) ||
+          !validate(descriptionValidatable) ||
+          !validate(peopleValidatable)
         ) {
           alert('Invalid input, please try again!');
           return;
