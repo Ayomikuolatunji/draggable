@@ -37,6 +37,10 @@ class ProjectInput {
         const title = this.titleInputElement.value;
         const description = this.descriptionInputElement.value;
         const people = this.peopleInputElement.value;
+        if (title.trim().length === 0
+            || description.trim.length === 0
+            || people.trim().length === 0) {
+        }
     }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
