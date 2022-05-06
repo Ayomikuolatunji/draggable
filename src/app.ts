@@ -19,7 +19,12 @@ function autobind(
       maxLength:number
   }
   function validite(validateInput:validitable){
+     let  isValid=true
+     if(validateInput.require){
+         isValid=isValid && validateInput.value.toString().trim().length !==0
+     }
 
+     return isValid
   }
 class ProjectInput {
     templateElement: HTMLTemplateElement;

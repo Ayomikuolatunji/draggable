@@ -17,6 +17,11 @@ function autobind(_, _2, descriptor) {
     return adjDescriptor;
 }
 function validite(validateInput) {
+    let isValid = true;
+    if (validateInput.require) {
+        isValid = isValid && validateInput.value.toString().trim().length !== 0;
+    }
+    return isValid;
 }
 class ProjectInput {
     constructor() {
