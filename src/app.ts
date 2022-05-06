@@ -47,11 +47,12 @@ class ProjectInput {
       event.preventDefault();
       console.log(this.titleInputElement.value);
     }
-    private gatherUserInput(){
-        
+    private gatherUserInput():[string,string,number]{
+
     }
     private configure() {
       this.element.addEventListener('submit', this.submitHandler);
+      const userInput=this.gatherUserInput()
     }
   
     private attach() {

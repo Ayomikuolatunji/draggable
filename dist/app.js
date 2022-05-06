@@ -37,6 +37,7 @@ class ProjectInput {
     }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
+        const userInput = this.gatherUserInput();
     }
     attach() {
         this.hostElement.insertAdjacentElement('afterbegin', this.element);
