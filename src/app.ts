@@ -1,3 +1,5 @@
+function autoBind(target:any, )
+
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
@@ -6,6 +8,7 @@ class ProjectInput {
     descriptionInputElement: HTMLInputElement;
     peopleInputElement: HTMLInputElement;
   
+
     constructor() {
       this.templateElement = document.getElementById(
         'project-input'
