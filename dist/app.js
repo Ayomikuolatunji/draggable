@@ -1,27 +1,26 @@
 "use strict";
-class projectInput {
+class ProjectInput {
     constructor() {
-        this.templateElement = document.querySelector("#project-input");
-        this.hostElement = document.querySelector("#app");
-        const importNode = document.importNode(this.templateElement.content, true);
-        this.element = importNode.firstElementChild;
-        this.element.id = "user_input";
-        //  input element
-        this.titleInputElement = document.querySelector("#title");
-        this.descInputElement = document.querySelector("#description");
-        this.poepleInputElement = document.querySelector("people");
+        this.templateElement = document.getElementById('project-input');
+        this.hostElement = document.getElementById('app');
+        const importedNode = document.importNode(this.templateElement.content, true);
+        this.element = importedNode.firstElementChild;
+        this.element.id = 'user-input';
+        this.titleInputElement = this.element.querySelector('#title');
+        this.descriptionInputElement = this.element.querySelector('#description');
+        this.peopleInputElement = this.element.querySelector('#people');
         this.configure();
         this.attach();
     }
     submitHandler(event) {
         event.preventDefault();
-        console.log("first");
+        console.log(this.titleInputElement.value);
     }
     configure() {
-        this.element.addEventListener("submit", this.submitHandler);
+        this.element.addEventListener('submit', this.submitHandler.bind(this));
     }
     attach() {
-        this.hostElement.insertAdjacentElement("afterbegin", this.element);
+        this.hostElement.insertAdjacentElement('afterbegin', this.element);
     }
 }
-const project = new projectInput();
+const prjInput = new ProjectInput();
