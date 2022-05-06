@@ -48,9 +48,9 @@ class ProjectInput {
         const enteredPeople = this.peopleInputElement.value;
     
         if (
-          enteredTitle.trim().length === 0 ||
-          enteredDescription.trim().length === 0 ||
-          enteredPeople.trim().length === 0
+           validite({value:enteredTitle, maxLength:5, require:true})
+        || validite({value:enteredDescription, maxLength:5, require:true})
+        || validite({value:enteredPeople, maxLength:5, require:true})
         ) {
           alert('Invalid input, please try again!');
           return;
