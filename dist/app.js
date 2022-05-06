@@ -5,6 +5,7 @@ class projectInput {
         this.hostElement = document.querySelector("#app");
         const importNode = document.importNode(this.templateElement.content, true);
         this.element = importNode.firstElementChild;
+        //  input element
         this.attach();
     }
     attach() {

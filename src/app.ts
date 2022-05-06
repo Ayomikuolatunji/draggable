@@ -2,6 +2,11 @@ class projectInput {
     templateElement:HTMLTemplateElement
     hostElement:HTMLDivElement
     element:HTMLFormElement
+    titleInputElement:HTMLInputElement
+    descInputElement:HTMLInputElement
+    poepleInputElement:HTMLInputElement
+
+
 
     constructor(){
         this.templateElement=document.querySelector("#project-input")! as HTMLTemplateElement
@@ -9,7 +14,7 @@ class projectInput {
 
         const importNode=document.importNode(this.templateElement.content,true)
         this.element=importNode.firstElementChild as HTMLFormElement
-      
+        //  input element
         this.attach()
     }
 
