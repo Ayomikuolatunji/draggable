@@ -50,13 +50,14 @@ class productList {
         this.element = importedNode.firstElementChild;
         this.element.id = `${this.type}-projects`;
         this.attach();
+        this.renderContent();
     }
     renderContent() {
         const listid = `${this.type}-project-lists`;
         this.element.querySelector("ul").id = listid;
     }
     attach() {
-        this.hostElement.insertAdjacentElement("afterbegin", this.element);
+        this.hostElement.insertAdjacentElement("beforeend", this.element);
         this.element.querySelector("h2").textContent = this.type.toUpperCase() + "PROJECT";
     }
 }
@@ -127,3 +128,5 @@ __decorate([
     autobind
 ], ProjectInput.prototype, "submitHandler", null);
 const prjInput = new ProjectInput();
+const projectList = new productList("active");
+const finishProject = new productList("finish");

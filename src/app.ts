@@ -74,6 +74,7 @@ function autobind(
       this.element.id = `${this.type}-projects`
       
       this.attach()
+      this.renderContent()
     }
 
     private renderContent(){
@@ -81,7 +82,7 @@ function autobind(
       this.element.querySelector("ul")!.id=listid
     }
     private attach(){
-       this.hostElement.insertAdjacentElement("afterbegin", this.element)
+       this.hostElement.insertAdjacentElement("beforeend", this.element)
        this.element.querySelector("h2")!.textContent=this.type.toUpperCase() + "PROJECT"
     }
   }
@@ -171,4 +172,5 @@ class ProjectInput {
   }
   
   const prjInput = new ProjectInput();
-  
+  const projectList=new productList("active")
+  const finishProject=new productList("finish")
