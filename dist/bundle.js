@@ -112,11 +112,11 @@ var App;
     }
     App.autobind = autobind;
 })(App || (App = {}));
-/// <reference path="./drop-drap-interfaces.ts"/>
-/// <reference path="./project-model.ts"/>
-/// <reference path="./global-state.ts"/>
-/// <reference path="./validate.ts"/>
-/// <reference path="./autobind-decorator.ts"/>
+/// <reference path="./model/drop-drap-interfaces.ts"/>
+/// <reference path="./model/project-model.ts"/>
+/// <reference path="./state/global-state.ts"/>
+/// <reference path="./util/validate.ts"/>
+/// <reference path="./model/autobind-decorator.ts"/>
 var App;
 (function (App) {
     // Component Base Class
