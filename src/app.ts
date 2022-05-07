@@ -1,6 +1,7 @@
 /// <reference path="./drop-drap-interfaces.ts"/>
 
-// Project Type
+namespace DDInterfaces {
+   // Project Type
 enum ProjectStatus {
   Active,
   Finished
@@ -364,3 +365,5 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
 const prjInput = new ProjectInput();
 const activePrjList = new ProjectList('active');
 const finishedPrjList = new ProjectList('finished');
+
+}
