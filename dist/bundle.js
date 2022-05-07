@@ -112,11 +112,6 @@ var App;
     }
     App.autobind = autobind;
 })(App || (App = {}));
-/// <reference path="./model/drop-drap-interfaces.ts"/>
-/// <reference path="./model/project-model.ts"/>
-/// <reference path="./state/global-state.ts"/>
-/// <reference path="./util/validate.ts"/>
-/// <reference path="./model/autobind-decorator.ts"/>
 var App;
 (function (App) {
     // Component Base Class
@@ -135,8 +130,18 @@ var App;
             this.hostElement.insertAdjacentElement(insertAtBeginning ? 'afterbegin' : 'beforeend', this.element);
         }
     }
+    App.Component = Component;
+})(App || (App = {}));
+/// <reference path="./model/drop-drap-interfaces.ts"/>
+/// <reference path="./model/project-model.ts"/>
+/// <reference path="./state/global-state.ts"/>
+/// <reference path="./util/validate.ts"/>
+/// <reference path="./model/autobind-decorator.ts"/>
+/// <reference path="./components/base.ts"/>
+var App;
+(function (App) {
     // ProjectItem Class
-    class ProjectItem extends Component {
+    class ProjectItem extends App.Component {
         constructor(hostId, project) {
             super('single-project', hostId, false, project.id);
             this.project = project;
@@ -172,7 +177,7 @@ var App;
         App.autobind
     ], ProjectItem.prototype, "dragStartHandler", null);
     // ProjectList Class
-    class ProjectList extends Component {
+    class ProjectList extends App.Component {
         constructor(type) {
             super('project-list', 'app', false, `${type}-projects`);
             this.type = type;
@@ -234,7 +239,7 @@ var App;
         App.autobind
     ], ProjectList.prototype, "dragLeaveHandler", null);
     // ProjectInput Class
-    class ProjectInput extends Component {
+    class ProjectInput extends App.Component {
         constructor() {
             super('project-input', 'app', true, 'user-input');
             this.titleInputElement = this.element.querySelector('#title');
