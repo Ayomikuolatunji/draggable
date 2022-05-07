@@ -24,8 +24,6 @@ var App;
     }
     App.Project = Project;
 })(App || (App = {}));
-/// <reference path="./drop-drap-interfaces.ts"/>
-/// <reference path="./project-model.ts"/>
 var App;
 (function (App) {
     class State {
@@ -66,7 +64,11 @@ var App;
             }
         }
     }
-    const projectState = ProjectState.getInstance();
+    App.ProjectState = ProjectState;
+    App.projectState = ProjectState.getInstance();
+})(App || (App = {}));
+var App;
+(function (App) {
     function validate(validatableInput) {
         let isValid = true;
         if (validatableInput.required) {
@@ -92,6 +94,10 @@ var App;
         }
         return isValid;
     }
+    App.validate = validate;
+})(App || (App = {}));
+var App;
+(function (App) {
     // autobind decorator
     function autobind(_, _2, descriptor) {
         const originalMethod = descriptor.value;
@@ -104,6 +110,15 @@ var App;
         };
         return adjDescriptor;
     }
+    App.autobind = autobind;
+})(App || (App = {}));
+/// <reference path="./drop-drap-interfaces.ts"/>
+/// <reference path="./project-model.ts"/>
+/// <reference path="./global-state.ts"/>
+/// <reference path="./validate.ts"/>
+/// <reference path="./autobind-decorator.ts"/>
+var App;
+(function (App) {
     // Component Base Class
     class Component {
         constructor(templateId, hostElementId, insertAtStart, newElementId) {
@@ -154,7 +169,7 @@ var App;
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectItem.prototype, "dragStartHandler", null);
     // ProjectList Class
     class ProjectList extends Component {
@@ -174,7 +189,7 @@ var App;
         }
         dropHandler(event) {
             const prjId = event.dataTransfer.getData('text/plain');
-            projectState.moveProject(prjId, this.type === 'active' ? App.ProjectStatus.Active : App.ProjectStatus.Finished);
+            App.projectState.moveProject(prjId, this.type === 'active' ? App.ProjectStatus.Active : App.ProjectStatus.Finished);
         }
         dragLeaveHandler(_) {
             const listEl = this.element.querySelector('ul');
@@ -184,7 +199,7 @@ var App;
             this.element.addEventListener('dragover', this.dragOverHandler);
             this.element.addEventListener('dragleave', this.dragLeaveHandler);
             this.element.addEventListener('drop', this.dropHandler);
-            projectState.addListener((projects) => {
+            App.projectState.addListener((projects) => {
                 const relevantProjects = projects.filter(prj => {
                     if (this.type === 'active') {
                         return prj.status === App.ProjectStatus.Active;
@@ -210,13 +225,13 @@ var App;
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dragOverHandler", null);
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dropHandler", null);
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dragLeaveHandler", null);
     // ProjectInput Class
     class ProjectInput extends Component {
@@ -250,9 +265,9 @@ var App;
                 min: 1,
                 max: 5
             };
-            if (!validate(titleValidatable) ||
-                !validate(descriptionValidatable) ||
-                !validate(peopleValidatable)) {
+            if (!App.validate(titleValidatable) ||
+                !App.validate(descriptionValidatable) ||
+                !App.validate(peopleValidatable)) {
                 alert('Invalid input, please try again!');
                 return;
             }
@@ -270,13 +285,13 @@ var App;
             const userInput = this.gatherUserInput();
             if (Array.isArray(userInput)) {
                 const [title, desc, people] = userInput;
-                projectState.addProject(title, desc, people);
+                App.projectState.addProject(title, desc, people);
                 this.clearInputs();
             }
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectInput.prototype, "submitHandler", null);
     const prjInput = new ProjectInput();
     const activePrjList = new ProjectList('active');
