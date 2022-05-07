@@ -81,12 +81,17 @@ function autobind(_, _2, descriptor) {
     };
     return adjDescriptor;
 }
+// component
+class Component {
+    constructor(templateId, hostId, newElement) {
+        this.templateElement = document.getElementById(templateId);
+        this.hostElement = document.getElementById(hostId);
+    }
+}
 // ProjectList Class
 class ProjectList {
     constructor(type) {
         this.type = type;
-        this.templateElement = document.getElementById('project-list');
-        this.hostElement = document.getElementById('app');
         this.assignedProjects = [];
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild;

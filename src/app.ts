@@ -109,7 +109,19 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   };
   return adjDescriptor;
 }
+// component
+class Component<T extends HTMLElement, U extends HTMLElement>{
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
 
+  constructor(templateId: string, hostId:string,newElement?:string){
+    this.templateElement = document.getElementById(
+      templateId
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById(hostId)! as T;
+  }
+}
 // ProjectList Class
 class ProjectList {
   templateElement: HTMLTemplateElement;
@@ -118,10 +130,7 @@ class ProjectList {
   assignedProjects: Project[];
 
   constructor(private type: 'active' | 'finished') {
-    this.templateElement = document.getElementById(
-      'project-list'
-    )! as HTMLTemplateElement;
-    this.hostElement = document.getElementById('app')! as HTMLDivElement;
+
     this.assignedProjects = [];
 
     const importedNode = document.importNode(
