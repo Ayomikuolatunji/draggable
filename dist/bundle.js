@@ -132,12 +132,7 @@ var App;
     }
     App.Component = Component;
 })(App || (App = {}));
-/// <reference path="./model/drop-drap-interfaces.ts"/>
-/// <reference path="./model/project-model.ts"/>
-/// <reference path="./state/global-state.ts"/>
-/// <reference path="./util/validate.ts"/>
-/// <reference path="./model/autobind-decorator.ts"/>
-/// <reference path="./components/base.ts"/>
+/// <reference path="./base.ts"/>
 var App;
 (function (App) {
     // ProjectItem Class
@@ -176,6 +171,10 @@ var App;
     __decorate([
         App.autobind
     ], ProjectItem.prototype, "dragStartHandler", null);
+    App.ProjectItem = ProjectItem;
+})(App || (App = {}));
+var App;
+(function (App) {
     // ProjectList Class
     class ProjectList extends App.Component {
         constructor(type) {
@@ -225,7 +224,7 @@ var App;
             const listEl = document.getElementById(`${this.type}-projects-list`);
             listEl.innerHTML = '';
             for (const prjItem of this.assignedProjects) {
-                new ProjectItem(this.element.querySelector('ul').id, prjItem);
+                new App.ProjectItem(this.element.querySelector('ul').id, prjItem);
             }
         }
     }
@@ -238,6 +237,12 @@ var App;
     __decorate([
         App.autobind
     ], ProjectList.prototype, "dragLeaveHandler", null);
+    App.ProjectList = ProjectList;
+})(App || (App = {}));
+/// <reference path="./project-list.ts"/>
+/// <reference path="./base.ts"/>
+var App;
+(function (App) {
     // ProjectInput Class
     class ProjectInput extends App.Component {
         constructor() {
@@ -280,25 +285,37 @@ var App;
                 return [enteredTitle, enteredDescription, +enteredPeople];
             }
         }
-        clearInputs() {
-            this.titleInputElement.value = '';
-            this.descriptionInputElement.value = '';
-            this.peopleInputElement.value = '';
-        }
-        submitHandler(event) {
-            event.preventDefault();
-            const userInput = this.gatherUserInput();
-            if (Array.isArray(userInput)) {
-                const [title, desc, people] = userInput;
-                App.projectState.addProject(title, desc, people);
-                this.clearInputs();
-            }
+    }
+    App.ProjectInput = ProjectInput;
+})(App || (App = {}));
+/// <reference path="./model/drop-drap-interfaces.ts"/>
+/// <reference path="./model/project-model.ts"/>
+/// <reference path="./state/global-state.ts"/>
+/// <reference path="./util/validate.ts"/>
+/// <reference path="./model/autobind-decorator.ts"/>
+/// <reference path="./components/base.ts"/>
+/// <reference path="./components/project-item.ts"/>
+/// <reference path="./components/Input.ts"/>
+/// <reference path="./components/project-list.ts"/>
+var App;
+(function (App) {
+    clearInputs();
+    {
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
+    }
+    submitHandler(event, Event);
+    {
+        event.preventDefault();
+        const userInput = this.gatherUserInput();
+        if (Array.isArray(userInput)) {
+            const [title, desc, people] = userInput;
+            App.projectState.addProject(title, desc, people);
+            this.clearInputs();
         }
     }
-    __decorate([
-        App.autobind
-    ], ProjectInput.prototype, "submitHandler", null);
-    const prjInput = new ProjectInput();
-    const activePrjList = new ProjectList('active');
-    const finishedPrjList = new ProjectList('finished');
 })(App || (App = {}));
+const prjInput = new ProjectInput();
+const activePrjList = new ProjectList('active');
+const finishedPrjList = new ProjectList('finished');
