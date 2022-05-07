@@ -1,28 +1,14 @@
 "use strict";
 /// <reference path="./drop-drap-interfaces.ts"/>
+/// <reference path="./project-model.ts"/>
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var DDInterfaces;
-(function (DDInterfaces) {
-    // Project Type
-    let ProjectStatus;
-    (function (ProjectStatus) {
-        ProjectStatus[ProjectStatus["Active"] = 0] = "Active";
-        ProjectStatus[ProjectStatus["Finished"] = 1] = "Finished";
-    })(ProjectStatus || (ProjectStatus = {}));
-    class Project {
-        constructor(id, title, description, people, status) {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            this.people = people;
-            this.status = status;
-        }
-    }
+var App;
+(function (App) {
     class State {
         constructor() {
             this.listeners = [];
@@ -44,7 +30,7 @@ var DDInterfaces;
             return this.instance;
         }
         addProject(title, description, numOfPeople) {
-            const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active);
+            const newProject = new App.Project(Math.random().toString(), title, description, numOfPeople, App.ProjectStatus.Active);
             this.projects.push(newProject);
             this.updateListeners();
         }
@@ -169,7 +155,7 @@ var DDInterfaces;
         }
         dropHandler(event) {
             const prjId = event.dataTransfer.getData('text/plain');
-            projectState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
+            projectState.moveProject(prjId, this.type === 'active' ? App.ProjectStatus.Active : App.ProjectStatus.Finished);
         }
         dragLeaveHandler(_) {
             const listEl = this.element.querySelector('ul');
@@ -182,9 +168,9 @@ var DDInterfaces;
             projectState.addListener((projects) => {
                 const relevantProjects = projects.filter(prj => {
                     if (this.type === 'active') {
-                        return prj.status === ProjectStatus.Active;
+                        return prj.status === App.ProjectStatus.Active;
                     }
-                    return prj.status === ProjectStatus.Finished;
+                    return prj.status === App.ProjectStatus.Finished;
                 });
                 this.assignedProjects = relevantProjects;
                 this.renderProjects();
@@ -276,4 +262,4 @@ var DDInterfaces;
     const prjInput = new ProjectInput();
     const activePrjList = new ProjectList('active');
     const finishedPrjList = new ProjectList('finished');
-})(DDInterfaces || (DDInterfaces = {}));
+})(App || (App = {}));
