@@ -82,6 +82,7 @@ function autobind(
     }
     private attach(){
        this.hostElement.insertAdjacentElement("afterbegin", this.element)
+       this.element.querySelector("h2")!.textContent=this.type.toUpperCase() + "PROJECT"
     }
   }
 class ProjectInput {
