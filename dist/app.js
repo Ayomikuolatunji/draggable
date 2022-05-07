@@ -49,6 +49,14 @@ class productList {
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild;
         this.element.id = `${this.type}-projects`;
+        this.attach();
+    }
+    renderContent() {
+        const listid = `${this.type}-project-lists`;
+        this.element.querySelector("ul").id = listid;
+    }
+    attach() {
+        this.hostElement.insertAdjacentElement("afterbegin", this.element);
     }
 }
 class ProjectInput {

@@ -73,7 +73,15 @@ function autobind(
       this.element = importedNode.firstElementChild as HTMLElement;
       this.element.id = `${this.type}-projects`
       
+      this.attach()
+    }
 
+    private renderContent(){
+      const listid=`${this.type}-project-lists`
+      this.element.querySelector("ul")!.id=listid
+    }
+    private attach(){
+       this.hostElement.insertAdjacentElement("afterbegin", this.element)
     }
   }
 class ProjectInput {
