@@ -55,7 +55,27 @@ function autobind(
     }
     return isValid;
   }
-  
+  class productList {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDivElement;
+    element: HTMLElement;
+
+    constructor(private type: "active" | "finish"){
+        this.templateElement = document.getElementById(
+            'project-list'
+          )! as HTMLTemplateElement;
+          this.hostElement = document.getElementById('app')! as HTMLDivElement;
+            
+      const importedNode = document.importNode(
+        this.templateElement.content,
+        true
+      );
+      this.element = importedNode.firstElementChild as HTMLElement;
+      this.element.id = `${this.type}-projects`
+      
+
+    }
+  }
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
