@@ -1,5 +1,16 @@
 // Project State Management
+enum projectStatus {ACTIVE,FINISHED}
+class Project{
+  constructor(
+    public id: string,
+    public title : string,
+    public description: string,
+    public people: string,
+    public status : projectStatus
+  ){
 
+  }
+}
 class ProjectState {
   private listeners: any[] = [];
   private projects: any[] = [];
